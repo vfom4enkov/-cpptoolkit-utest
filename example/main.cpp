@@ -2,28 +2,24 @@
 #include <cpptoolkit/utest/macros.h>
 #include <cassert>
 
-void test_f() {
-  TK_TEST_EQUAL(5, 6);
-}
+#define MCR(a)    \
+void a();         \
+class _a_a {      \
+  public:         \
+    void Exec() { \
+      a();        \
+    }             \
+};                \
+void a()
 
-void test_t() {
-  TK_TEST_TRUE(5 == 6);
-}
-
-void test_d() {
-  TK_TEST_FALSE(true)
-}
-
-void test_null() {
-  int d = 5;
-  TK_TEST_IS_NULL(&d);
+MCR(my_function) {
+  std::cout << "Function: " << __func__ << std::endl;
+  std::cout << "File: " << __FILE__ << std::endl;
+  std::cout << "Line: " << __LINE__ << std::endl;
 }
 
 int main() {
-  // test_f();
-  // test_t();
-  // test_d();
-  test_null();
-  std::cout << GREEN_COLOR_START << "Hello!" << COLOR_STOP << std::endl;
+  _a_a item;
+  item.Exec();
 }
 

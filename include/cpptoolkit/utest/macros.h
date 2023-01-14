@@ -11,26 +11,20 @@
       << "Error:\t" << x << std::endl \
       << "Where:\t" << __FILE__ << ":" << __LINE__ << COLOR_STOP;\
 
-#define TK_TEST_EQUAL(expected, actual) \
+#define TK_CHECK_EQUAL(expected, actual)\
   if (expected != actual) {             \
     FAIL_TEST_OUT(expected << " is not equal to " << actual)\
     return;\
   } 
 
-#define TK_TEST_TRUE(val)       \
+#define TK_CHECK(val)           \
   if (!static_cast<bool>(val)) {\
     FAIL_TEST_OUT(#val << " is not true")\
     return;\
   }
 
-#define TK_TEST_FALSE(val)      \
-  if (static_cast<bool>(val)) { \
-    FAIL_TEST_OUT(#val << " is not false")\
-    return;\
-  }
-
-#define TK_TEST_IS_NULL(ptr)\
-  if (ptr != nullptr) {     \
+#define TK_CHECK_IS_NULL(ptr) \
+  if (ptr != nullptr) {       \
     FAIL_TEST_OUT("pointer is not null")\
     return;\
   }
