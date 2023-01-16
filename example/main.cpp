@@ -1,6 +1,6 @@
-#include <cpptoolkit/utest/macros.h>
-#include <cpptoolkit/utest/tool/TestFailException.h>
-#include <cpptoolkit/utest/utest.h>
+#include <cpptoolkit/test/macros.h>
+#include <cpptoolkit/test/tool/TestFailException.h>
+#include <cpptoolkit/test/utest.h>
 
 #include <cassert>
 #include <cstdio>
@@ -26,7 +26,7 @@ class Tester {
 } instnce;
 
 void ThrowFunction() {
-  throw cpptoolkit::utest::tool::TestFailException("ThrowFunction", "just fail",
+  throw cpptoolkit::test::tool::TestFailException("ThrowFunction", "just fail",
                                                    "main.cpp");
 }
 
@@ -37,9 +37,9 @@ int main() {
   try {
     ThrowFunction();
   }
-  catch (const cpptoolkit::utest::tool::TestFailException &ex) {
+  catch (const cpptoolkit::test::tool::TestFailException &ex) {
     std::cout << "Function:\t" << ex.function() << std::endl;
     std::cout << "Why:\t\t" << ex.why() << std::endl;
-    std::cout << "Where:\t" << ex.where() << std::endl;
+    std::cout << "Where:\t\t" << ex.where() << std::endl;
   }
 }

@@ -1,11 +1,11 @@
-#ifndef CPPTOOLKIT_UTEST_TEST_FAIL_EXCEPTION_H_
-#define CPPTOOLKIT_UTEST_TEST_FAIL_EXCEPTION_H_
+#ifndef CPPTOOLKIT_TEST_TEST_FAIL_EXCEPTION_H_
+#define CPPTOOLKIT_TEST_TEST_FAIL_EXCEPTION_H_
 
 #include <stdexcept>
 #include <string>
 
 namespace cpptoolkit {
-namespace utest {
+namespace test {
 namespace tool {
 
 /// @brief Custom exception with data about failed test 
@@ -38,8 +38,8 @@ class TestFailException : public std::runtime_error {
 };
 
 } // namespace tool
-} // namespace utest
+} // namespace test
 } // namespace cpptoolkit
 
-#endif  // CPPTOOLKIT_UTEST_TEST_FAIL_EXCEPTION_H_
+#endif  // CPPTOOLKIT_TEST_TEST_FAIL_EXCEPTION_H_
 

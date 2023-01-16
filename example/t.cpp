@@ -1,4 +1,4 @@
-#include <cpptoolkit/utest/utest.h>
+#include <cpptoolkit/test/utest.h>
 #include <iostream>
 
 class t_class {
