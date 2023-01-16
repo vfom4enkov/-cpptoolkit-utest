@@ -27,48 +27,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef CPPTOOLKIT_TEST_TEST_FAIL_EXCEPTION_H_
-#define CPPTOOLKIT_TEST_TEST_FAIL_EXCEPTION_H_
+#ifndef CPPTOOLKIT_TEST_CORE_H_
+#define CPPTOOLKIT_TEST_CORE_H_
 
-#include <stdexcept>
-#include <string>
+#include <cpptoolkit/test/tool/BaseFixture.h>
+#include <cpptoolkit/test/tool/TestFailException.h>
+
+#include <vector>
 
 namespace cpptoolkit {
 namespace test {
-namespace tool {
 
-/// @brief Custom exception with data about failed test
-class TestFailException : public std::runtime_error {
- public:
+/// struct TestsResult Statistic about tests execution
+struct TestsResult {
 
-  /// @brief Create custom exception
-  /// @param function Name of test function where the test was failed
-  /// @param why Short description why the test fail
-  /// @param where Path to file name and line number where test fail
-  TestFailException(const char* function, const char* why, const char* where)
-      : std::runtime_error(why),
-        function_(function),
-        why_(why),
-        where_(where){};
+  /// @total_tests Total test coutn
+  uint32_t total_tests;
 
-  /// @brief Get test function name where test fail
-  const std::string& function() const { return function_; };
-  
-  /// @brief Get fail description
-  const std::string& why() const { return why_; };
-  
-  /// @brief Get path to file and line number where test fail
-  const std::string& where() const { return where_; };
+  /// @success_tests Count of success test
+  uint32_t success_tests;
 
- private:
-  const std::string function_;
-  const std::string why_;
-  const std::string where_;
+  /// @fail_tests Details about fail tests
+  std::vector<cpptoolkit::test::tool::TestFailException> fail_tests;
 };
 
-} // namespace tool
-} // namespace test
-} // namespace cpptoolkit
+/// @brief Test container and runner (this object is singleton)
+class Core {
+ public:
 
-#endif  // CPPTOOLKIT_TEST_TEST_FAIL_EXCEPTION_H_
+  /// @brief Add test fuxture to queue
+  /// @param fixture Test fixture (test environment)
+  void Add(cpptoolkit::test::tool::BaseFixture *fixture);
+  
+  /// @brief Run all tests and return statistic
+  /// @return Tests statistic
+  TestsResult RunTests();
 
+  /// @brief Get pointer to instance of test container
+  static Core *instance();
+
+ private:
+  Core() = default;
+
+ private:
+  std::vector<cpptoolkit::test::tool::BaseFixture *> test_list_;
+  static Core *instance_;
+};
+
+}  // namespace test
+}  // namespace cpptoolkit
+
+#endif  // CPPTOOLKIT_TEST_CORE_H_

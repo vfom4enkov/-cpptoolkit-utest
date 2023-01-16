@@ -1,4 +1,5 @@
 #include <cpptoolkit/test/macros.h>
+#include <cpptoolkit/test/core.h>
 #include <cpptoolkit/test/tool/BaseFixture.h>
 #include <cpptoolkit/test/tool/TestFailException.h>
 #include <cpptoolkit/test/utest.h>
@@ -36,6 +37,7 @@ class MyFixture {
  public:
   MyFixture() { std::cout << "My fixture constructor" << std::endl; };
   ~MyFixture() { std::cout << "My fixture destructor!" << std::endl; };
+  void RunTest() {std::cout << "MyFixture Run!" << std::endl;};
 };
 
 class CustomFixture : public cpptoolkit::test::tool::BaseFixture,
@@ -53,10 +55,23 @@ std::shared_ptr<cpptoolkit::test::tool::BaseFixture> getFixture() {
 }
 
 int main() {
+  cpptoolkit::test::Core *core = cpptoolkit::test::Core::instance();
+  if (core == nullptr) {
+    std::cerr << "Core is null";
+  }
+
+  try {
+    cpptoolkit::test::TestsResult result = core->RunTests();
+  }
+  catch(...) {
+    std::cerr << "Error on test";
+  }
+
   // _a_a a;
   // a.Exec();
-  std::shared_ptr<cpptoolkit::test::tool::BaseFixture> fixture = getFixture();
-  fixture->RunTest();
+
+  // std::shared_ptr<cpptoolkit::test::tool::BaseFixture> fixture = getFixture();
+  // fixture->RunTest();
 
   // try {
   //   ThrowFunction();
