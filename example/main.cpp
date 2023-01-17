@@ -59,6 +59,11 @@ class MainObserver : public cpptoolkit::test::Observer {
     if (result.is_success) {
       success_++;
     } else {
+      std::cout << RED_COLOR << "\twhy:\t" << result.why << CLEAR_COLOR
+                << std::endl;
+      std::cout << RED_COLOR << "\twhere:\t" << result.where << CLEAR_COLOR
+                << std::endl;
+      std::cout << std::endl;
       failed_++;
     }
   };

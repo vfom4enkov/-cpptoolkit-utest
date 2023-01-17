@@ -54,18 +54,17 @@ class MockFixture {};
 #define _TK_MACROS_STRING_CONCATENATION3(a, b, c) a##b##c
 
 #define __TK_MACROS_THROW(why)                                            \
-  cpptoolkit::test::tool::ThrowTestFailException(__func__, why, __FILE__, \
-                                                 __LINE__);
+  cpptoolkit::test::tool::ThrowTestFailException(why, __FILE__, __LINE__);
 
 #define TK_EQUAL(expected, actual)             \
   if (expected != actual) {                    \
-    std::string why = "Values are not equal!"; \
+    std::string why = "values are not equal!"; \
     __TK_MACROS_THROW(why);                    \
   }
 
 #define TK_CHECK(val)                        \
   if (!static_cast<bool>(val)) {             \
-    std::string why = "The check is failed"; \
+    std::string why = "the check is failed"; \
     __TK_MACROS_THROW(why);                  \
   }
 
