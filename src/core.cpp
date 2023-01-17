@@ -51,7 +51,7 @@ TestsResult Core::RunTests() {
   for (uint32_t i = 0; i < test_list_.size(); i++) {
     try {
       cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
-      fixture->RunTest();
+      fixture->Test();
     } catch (const cpptoolkit::test::tool::TestFailException &ex) {
       result.fail_tests.emplace_back(ex);
     }

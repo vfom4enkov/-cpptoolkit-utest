@@ -1,7 +1,7 @@
 #include <cpptoolkit/test/macros.h>
 #include <cpptoolkit/test/core.h>
-#include <cpptoolkit/test/tool/BaseFixture.h>
-#include <cpptoolkit/test/tool/TestFailException.h>
+#include <cpptoolkit/test/tool/base_fixture.h>
+#include <cpptoolkit/test/tool/test_fail_exception.h>
 #include <cpptoolkit/test/utest.h>
 
 #include <cassert>
@@ -45,7 +45,7 @@ class CustomFixture : public cpptoolkit::test::tool::BaseFixture,
  public:
   CustomFixture() : MyFixture(){ std::cout << "CustomFixture constructor" << std::endl;};
   virtual ~CustomFixture() {std::cout << "CustomFixture destructor" << std::endl;};
-  void RunTest() override {
+  void Test() override {
     std::cout << "Run test function" << std::endl;
   };
 };
@@ -71,7 +71,7 @@ int main() {
   // a.Exec();
 
   // std::shared_ptr<cpptoolkit::test::tool::BaseFixture> fixture = getFixture();
-  // fixture->RunTest();
+  // fixture->Test();
 
   // try {
   //   ThrowFunction();

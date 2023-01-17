@@ -30,8 +30,8 @@
 #ifndef CPPTOOLKIT_TEST_CORE_H_
 #define CPPTOOLKIT_TEST_CORE_H_
 
-#include <cpptoolkit/test/tool/BaseFixture.h>
-#include <cpptoolkit/test/tool/TestFailException.h>
+#include <cpptoolkit/test/tool/base_fixture.h>
+#include <cpptoolkit/test/tool/test_fail_exception.h>
 
 #include <vector>
 

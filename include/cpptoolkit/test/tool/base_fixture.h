@@ -44,7 +44,7 @@ class BaseFixture {
     virtual ~BaseFixture() = default;
 
     /// @brief Run a unit test bounded with this fixture
-    virtual void RunTest() = 0;
+    virtual void Test() = 0;
 };
 
 } // namespace tool
