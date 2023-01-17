@@ -59,3 +59,4 @@ TK_FIXTURE_TEST_CASE(test_fixture, Fixture) {
   TK_IS_NOT_NULL(This());
   TK_IS_NULL(Nullptr());
 }
+

@@ -57,30 +57,30 @@ class MockFixture {};
   cpptoolkit::test::tool::ThrowTestFailException(__func__, why, __FILE__, \
                                                  __LINE__);
 
-#define TK_EQUAL(expected, actual)                                     \
-  if (expected != actual) {                                            \
-    std::string why = "Values are not equal!";                         \
-    __TK_MACROS_THROW(why);                                            \
+#define TK_EQUAL(expected, actual)             \
+  if (expected != actual) {                    \
+    std::string why = "Values are not equal!"; \
+    __TK_MACROS_THROW(why);                    \
   }
 
-#define TK_CHECK(val)                                             \
-  if (!static_cast<bool>(val)) {                                  \
-    std::string why = "The check is failed";                      \
-    __TK_MACROS_THROW(why);                                       \
+#define TK_CHECK(val)                        \
+  if (!static_cast<bool>(val)) {             \
+    std::string why = "The check is failed"; \
+    __TK_MACROS_THROW(why);                  \
   }
 
-#define TK_IS_NULL(ptr)                                           \
-  if (ptr != nullptr) {                                           \
-    std::string why = _TK_MACROS_TO_STRING(ptr);                  \
-    why += " is not null";                                        \
-    __TK_MACROS_THROW(why);                                       \
+#define TK_IS_NULL(ptr)                          \
+  if (ptr != nullptr) {                          \
+    std::string why = _TK_MACROS_TO_STRING(ptr); \
+    why += " is not null";                       \
+    __TK_MACROS_THROW(why);                      \
   }
 
-#define TK_IS_NOT_NULL(ptr)                                   \
-  if (ptr == nullptr) {                                       \
-    std::string why = _TK_MACROS_TO_STRING(ptr);              \
-    why += " is null";                                        \
-    __TK_MACROS_THROW(why);                                   \
+#define TK_IS_NOT_NULL(ptr)                      \
+  if (ptr == nullptr) {                          \
+    std::string why = _TK_MACROS_TO_STRING(ptr); \
+    why += " is null";                           \
+    __TK_MACROS_THROW(why);                      \
   }
 
 #define TK_FIXTURE_TEST_CASE(test_name, fixture)                       \
@@ -92,11 +92,12 @@ class MockFixture {};
     };                                                                 \
     virtual ~_TK_MACROS_STRING_CONCATENATION(test_name, _class)(){};   \
     void Test() override;                                              \
+    std::string name() override{                                       \
+        return std::string(_TK_MACROS_TO_STRING(test_name)); };        \
   } _TK_MACROS_STRING_CONCATENATION3(test_name, _class, _instance);    \
   void _TK_MACROS_STRING_CONCATENATION(test_name, _class)::Test()
 
 #define TK_TEST_CASE(test_name) \
   TK_FIXTURE_TEST_CASE(test_name, cpptoolkit::test::tool::MockFixture)
 
-#endif // CPPTOOLKIT_TEST_HEADER_H_
-
+#endif  // CPPTOOLKIT_TEST_HEADER_H_

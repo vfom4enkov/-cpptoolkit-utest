@@ -45,22 +45,27 @@ void Core::Add(cpptoolkit::test::tool::BaseFixture *fixture) {
   test_list_.push_back(fixture);
 }
 
-TestsResult Core::RunTests() {
-  TestsResult result;
-  result.total_tests = test_list_.size();
-  result.success_tests = 0;
+uint32_t Core::count() { return test_list_.size(); }
+
+void Core::RunTests(Observer *observer) {
   for (uint32_t i = 0; i < test_list_.size(); i++) {
+    cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
+    TestResult result;
+    result.name = fixture->name();
     try {
-      cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
       fixture->Test();
-      result.success_tests++;
+      result.is_success = true;
     } catch (const cpptoolkit::test::tool::TestFailException &ex) {
-      result.fail_tests.emplace_back(ex);
+      result.is_success = false;
+      result.where = ex.where();
+      result.why = ex.why();
+    }
+
+    if (observer != nullptr) {
+      observer->Test(result);
     }
   }
-  return std::move(result);
 }
 
 }  // namespace test
 }  // namespace cpptoolkit
-
