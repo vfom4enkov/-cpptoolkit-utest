@@ -50,10 +50,6 @@ class CustomFixture : public cpptoolkit::test::tool::BaseFixture,
   };
 };
 
-std::shared_ptr<cpptoolkit::test::tool::BaseFixture> getFixture() {
-  return std::shared_ptr<CustomFixture>(new CustomFixture());
-}
-
 int main() {
   cpptoolkit::test::Core *core = cpptoolkit::test::Core::instance();
   if (core == nullptr) {
@@ -63,14 +59,12 @@ int main() {
   try {
     cpptoolkit::test::TestsResult result = core->RunTests();
   }
+  catch(const std::runtime_error& ex) {
+    std::cerr << "Error: " << ex.what() << std::endl;
+  }
   catch(...) {
     std::cerr << "Error on test";
   }
-
-  // _a_a a;
-  // a.Exec();
-
-  // std::shared_ptr<cpptoolkit::test::tool::BaseFixture> fixture = getFixture();
   // fixture->Test();
 
   // try {
