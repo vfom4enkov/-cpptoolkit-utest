@@ -30,6 +30,8 @@
 #ifndef CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
 #define CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
 
+#include <string>
+
 namespace cpptoolkit {
 namespace test {
 namespace tool {
@@ -45,6 +47,9 @@ class BaseFixture {
 
     /// @brief Run a unit test bounded with this fixture
     virtual void Test() = 0;
+
+    /// @brief Get test name
+    virtual std::string name() = 0;
 };
 
 } // namespace tool

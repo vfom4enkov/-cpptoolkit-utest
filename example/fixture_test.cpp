@@ -27,45 +27,36 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cpptoolkit/test/core.h>
+#include <cpptoolkit/test/header.h>
 
-namespace cpptoolkit {
-namespace test {
+#include <string>
 
-Core *Core::instance_ = nullptr;
+namespace {
+class Fixture {
+  public:
+    Fixture* This();
+    Fixture* Nullptr();
+  public:
+    int value = 10;
+    double d_value = 20.0006;
+    std::string str = "Fixture string";
+};
 
-Core *Core::instance() {
-  if (instance_ == nullptr) {
-    instance_ = new Core();
-  }
-  return instance_;
+Fixture* Fixture::This() {
+  return this;
 }
 
-void Core::Add(cpptoolkit::test::tool::BaseFixture *fixture) {
-  test_list_.push_back(fixture);
+Fixture* Fixture::Nullptr() {
+  return nullptr;
 }
 
-uint32_t Core::count() { return test_list_.size(); }
+}  // namespace
 
-void Core::RunTests(Observer *observer) {
-  for (uint32_t i = 0; i < test_list_.size(); i++) {
-    cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
-    TestResult result;
-    result.name = fixture->name();
-    try {
-      fixture->Test();
-      result.is_success = true;
-    } catch (const cpptoolkit::test::tool::TestFailException &ex) {
-      result.is_success = false;
-      result.where = ex.where();
-      result.why = ex.why();
-    }
-
-    if (observer != nullptr) {
-      observer->Test(result);
-    }
-  }
+TK_FIXTURE_TEST_CASE(test_fixture, Fixture) {
+  TK_EQUAL(10, value);
+  TK_EQUAL(20.0006, d_value);
+  TK_EQUAL("Fixture string", str);
+  TK_IS_NOT_NULL(This());
+  TK_IS_NULL(Nullptr());
 }
 
-}  // namespace test
-}  // namespace cpptoolkit

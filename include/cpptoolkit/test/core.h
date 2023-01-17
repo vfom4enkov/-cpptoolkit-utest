@@ -38,17 +38,31 @@
 namespace cpptoolkit {
 namespace test {
 
-/// struct TestsResult Statistic about tests execution
-struct TestsResult {
+/// struct TestsResult execution result
+struct TestResult {
 
-  /// @total_tests Total test coutn
-  uint32_t total_tests;
+  /// @is_success Is success current test or not 
+  bool is_success;
 
-  /// @success_tests Count of success test
-  uint32_t success_tests;
+  /// @name Test name 
+  std::string name;
 
-  /// @fail_tests Details about fail tests
-  std::vector<cpptoolkit::test::tool::TestFailException> fail_tests;
+  /// @where File name and line number where test fail
+  std::string where;
+
+  /// @why Description why test fail
+  std::string why;
+};
+
+
+/// @brief Notificator about test execution 
+class Observer {
+  public:
+    virtual ~Observer() = default;
+
+    /// @brief Notify about test execution
+    /// @param result Test execution result
+    virtual void Test(TestResult &result) = 0;
 };
 
 /// @brief Test container and runner (this object is singleton)
@@ -58,10 +72,13 @@ class Core {
   /// @brief Add test fuxture to queue
   /// @param fixture Test fixture (test environment)
   void Add(cpptoolkit::test::tool::BaseFixture *fixture);
-  
-  /// @brief Run all tests and return statistic
-  /// @return Tests statistic
-  TestsResult RunTests();
+
+  /// @brief Get all test count
+  uint32_t count();
+
+  /// @brief Run all unit tests
+  /// @param observer Observer for get result about each test execution
+  void RunTests(Observer *observer = nullptr);
 
   /// @brief Get pointer to instance of test container
   static Core *instance();
@@ -78,3 +95,4 @@ class Core {
 }  // namespace cpptoolkit
 
 #endif  // CPPTOOLKIT_TEST_CORE_H_
+

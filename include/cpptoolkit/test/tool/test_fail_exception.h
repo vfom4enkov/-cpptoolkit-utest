@@ -42,18 +42,13 @@ class TestFailException : public std::runtime_error {
  public:
 
   /// @brief Create custom exception
-  /// @param function Name of test function where the test was failed
   /// @param why Short description why the test fail
   /// @param where Path to file name and line number where test fail
-  TestFailException(const char* function, const char* why, const char* where)
+  TestFailException(const char* why, const char* where)
       : std::runtime_error(why),
-        function_(function),
         why_(why),
         where_(where){};
 
-  /// @brief Get test function name where test fail
-  const std::string& function() const { return function_; };
-  
   /// @brief Get fail description
   const std::string& why() const { return why_; };
   
@@ -61,7 +56,6 @@ class TestFailException : public std::runtime_error {
   const std::string& where() const { return where_; };
 
  private:
-  const std::string function_;
   const std::string why_;
   const std::string where_;
 };

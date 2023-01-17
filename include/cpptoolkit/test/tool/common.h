@@ -37,12 +37,10 @@ namespace test {
 namespace tool {
 
 /// @brief Function for throw TestFailException for failed tests
-/// @param function Test function name
 /// @param why Fail reason description
 /// @param file File with failed test
 /// @param line Line number where test fail
-void ThrowTestFailException(std::string function,
-                            std::string why,
+void ThrowTestFailException(std::string why,
                             std::string file,
                             uint32_t line);
 

@@ -27,45 +27,38 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cpptoolkit/test/core.h>
+#include "cpptoolkit/test/header.h"
 
-namespace cpptoolkit {
-namespace test {
-
-Core *Core::instance_ = nullptr;
-
-Core *Core::instance() {
-  if (instance_ == nullptr) {
-    instance_ = new Core();
-  }
-  return instance_;
+TK_TEST_CASE(test_compare_two_numbers) {
+  int a = 5;
+  int b = 5;
+  TK_EQUAL(a, b);
 }
 
-void Core::Add(cpptoolkit::test::tool::BaseFixture *fixture) {
-  test_list_.push_back(fixture);
+TK_TEST_CASE(test_compare_two_doubles) {
+  double m = 16.005;
+  double n = 16.005;
+  TK_EQUAL(m, n);
 }
 
-uint32_t Core::count() { return test_list_.size(); }
-
-void Core::RunTests(Observer *observer) {
-  for (uint32_t i = 0; i < test_list_.size(); i++) {
-    cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
-    TestResult result;
-    result.name = fixture->name();
-    try {
-      fixture->Test();
-      result.is_success = true;
-    } catch (const cpptoolkit::test::tool::TestFailException &ex) {
-      result.is_success = false;
-      result.where = ex.where();
-      result.why = ex.why();
-    }
-
-    if (observer != nullptr) {
-      observer->Test(result);
-    }
-  }
+TK_TEST_CASE(test_compare_two_strings) {
+  std::string str_1 = "test string";
+  std::string str_2 = "test string";
+  TK_EQUAL(str_1, str_2);
 }
 
-}  // namespace test
-}  // namespace cpptoolkit
+TK_TEST_CASE(test_bool_value) {
+  bool val = true;
+  TK_CHECK(val);
+}
+
+TK_TEST_CASE(test_pointer_is_not_null) {
+  int num = 16;
+  TK_IS_NOT_NULL(&num);
+}
+
+TK_TEST_CASE(test_pointer_in_null) {
+  int *num = nullptr;
+  TK_IS_NULL(num);
+}
+
