@@ -27,29 +27,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
-#define CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
+#ifndef CPPTOOLKIT_TEST_HEADER_H_
+#define CPPTOOLKIT_TEST_HEADER_H_
 
-namespace cpptoolkit {
-namespace test {
-namespace tool {
+#include <cpptoolkit/test/core.h>
+#include <cpptoolkit/test/macros.h>
 
-/// @brief Base fixture class for all tests 
-class BaseFixture {
-  public:
-
-    /// @brief Create base fixture class
-    BaseFixture() = default;
-
-    virtual ~BaseFixture() = default;
-
-    /// @brief Run a unit test bounded with this fixture
-    virtual void RunTest() = 0;
-};
-
-} // namespace tool
-} // namespace test
-} // namespace cpptoolkit
-
-#endif // CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
+#endif // CPPTOOLKIT_TEST_HEADER_H_
 

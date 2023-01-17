@@ -27,46 +27,28 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cpptoolkit/test/header.h>
+#ifndef CPPTOOLKIT_TEST_TOOL_COMMON_H_
+#define CPPTOOLKIT_TEST_TOOL_COMMON_H_
 
-#include <iostream>
+#include <cpptoolkit/test/tool/test_fail_exception.h>
 
-#define RED_COLOR "\033[1;31m"
-#define GREEN_COLOR "\033[1;32m"
-#define CLEAR_COLOR "\033[0m"
+namespace cpptoolkit {
+namespace test {
+namespace tool {
 
-void PrintError(const cpptoolkit::test::tool::TestFailException& ex) {
-  std::cerr << "Function:\t" << RED_COLOR << ex.function() << CLEAR_COLOR
-            << std::endl;
-  std::cerr << "Why:\t\t" << RED_COLOR << ex.why() << CLEAR_COLOR << std::endl;
-  std::cerr << "Where:\t\t" << RED_COLOR << ex.where() << CLEAR_COLOR
-            << std::endl;
-  std::cerr << std::endl;
-}
+/// @brief Function for throw TestFailException for failed tests
+/// @param function Test function name
+/// @param why Fail reason description
+/// @param file File with failed test
+/// @param line Line number where test fail
+void ThrowTestFailException(std::string function,
+                            std::string why,
+                            std::string file,
+                            uint32_t line);
 
-int main() {
-  cpptoolkit::test::Core* core = cpptoolkit::test::Core::instance();
-  if (core == nullptr) {
-    std::cerr << "Core is null";
-  }
+} // namespace tool
+} // namespace test
+} // namespace cpptoolkit
 
-  try {
-    cpptoolkit::test::TestsResult result = core->RunTests();
-    if (result.success_tests == result.total_tests) {
-      std::cout << GREEN_COLOR << "[" << result.success_tests << "] "
-                << "All tests are passed!" << CLEAR_COLOR << std::endl;
-      return 0;
-    }
-
-    for (auto it = result.fail_tests.begin(); it != result.fail_tests.end();
-         it++) {
-      PrintError(*it);
-    }
-
-  } catch (const std::runtime_error& ex) {
-    std::cerr << "Error: " << ex.what() << std::endl;
-  } catch (...) {
-    std::cerr << "Error on test";
-  }
-}
+#endif // CPPTOOLKIT_TEST_TOOL_COMMON_H_
 

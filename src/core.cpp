@@ -48,10 +48,12 @@ void Core::Add(cpptoolkit::test::tool::BaseFixture *fixture) {
 TestsResult Core::RunTests() {
   TestsResult result;
   result.total_tests = test_list_.size();
+  result.success_tests = 0;
   for (uint32_t i = 0; i < test_list_.size(); i++) {
     try {
       cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
-      fixture->RunTest();
+      fixture->Test();
+      result.success_tests++;
     } catch (const cpptoolkit::test::tool::TestFailException &ex) {
       result.fail_tests.emplace_back(ex);
     }
