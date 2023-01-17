@@ -28,7 +28,6 @@
  */
 
 #include <cpptoolkit/test/header.h>
-//#include <cpptoolkit/test/main_macros.h>
 
 #include <iostream>
 
@@ -59,10 +58,8 @@ class MainObserver : public cpptoolkit::test::Observer {
     if (result.is_success) {
       success_++;
     } else {
-      std::cout << "\twhy:\t" << RED_COLOR << result.why << CLEAR_COLOR
-                << std::endl;
-      std::cout << "\twhere:\t" << RED_COLOR << result.where << CLEAR_COLOR
-                << std::endl;
+      std::cout << "\twhy:\t" << result.why << std::endl;
+      std::cout << "\twhere:\t" << result.where << std::endl;
       std::cout << std::endl;
       failed_++;
     }
