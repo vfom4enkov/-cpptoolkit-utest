@@ -30,8 +30,8 @@
 #ifndef CPPTOOLKIT_TEST_HEADER_H_
 #define CPPTOOLKIT_TEST_HEADER_H_
 
-#include "core.h"
-#include "macros.h"
+#include <cpptoolkit/test/core.h>
+#include <cpptoolkit/test/macros.h>
 
 #endif // CPPTOOLKIT_TEST_HEADER_H_
 
