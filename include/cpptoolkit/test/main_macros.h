@@ -30,7 +30,7 @@
       cpptoolkit::test::TestsResult result = core->RunTests();                 \
       if (result.success_tests == result.total_tests) {                        \
         std::cout << GREEN_COLOR << "[" << result.success_tests << "] "        \
-                  << "All tests are passed!" << CLEAR_COLOR << std::endl;      \
+                  << "All tests passed!" << CLEAR_COLOR << std::endl;          \
         return 0;                                                              \
       }                                                                        \
                                                                                \
