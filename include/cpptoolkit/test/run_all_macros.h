@@ -30,11 +30,15 @@
 #ifndef CPPTOOLKIT_TEST_RUN_ALL_MACROS_H_
 #define CPPTOOLKIT_TEST_RUN_ALL_MACROS_H_
 
+#include <cpptoolkit/test/header.h>
+
+#include <iostream>
+
 #define RED_COLOR "\033[1;31m"
 #define GREEN_COLOR "\033[1;32m"
 #define CLEAR_COLOR "\033[0m"
 
-#define _TK_RUN_ALL_MACROS                                              \
+#define TK_RUN_ALL_MACROS                                               \
   std::string PrintTestResult(bool result) {                            \
     std::string r("");                                                  \
     if (result) {                                                       \
