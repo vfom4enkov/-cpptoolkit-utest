@@ -10,7 +10,7 @@ target_link_libraries({your-project-name} cpptoolkit-test)
 ```
 
 ## Step 2 - Create unit tests
-Include the header to .cpp file:
+Include the header to _test_.cpp file:
 ```
 #include <cpptoolkit/test/header.h>
 ```
@@ -30,7 +30,7 @@ For example:
 ```cpp
 #include <cpptoolkit/test/header.h>
 
-TK_TEST_CASE(test_compare_two_numbers) {
+TK_TEST_CASE(test_compare_sum_of_two_numbers) {
   // arrange
   int a = 3;
   int b = 7;

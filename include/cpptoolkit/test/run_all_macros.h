@@ -49,17 +49,12 @@
   int Run() {                                                               \
     cpptoolkit::test::Core* core = cpptoolkit::test::Core::instance();      \
     if (core == nullptr) {                                                  \
-      std::cerr << "Core is null" << std::endl;                             \
       return -1;                                                            \
     }                                                                       \
                                                                             \
     try {                                                                   \
-      uint32_t test_count = core->count();                                  \
-      if (test_count == 1) {                                                \
-        std::cout << "running 1 test" << std::endl;                         \
-      } else {                                                              \
-        std::cout << "running " << test_count << " tests" << std::endl;     \
-      }                                                                     \
+      std::cout << "running " << core->count() << " test"                   \
+                  << (core->count() == 1 ? "s" : "") << std::endl;          \
                                                                             \
       uint32_t success = 0;                                                 \
       uint32_t failed = 0;                                                  \
@@ -81,7 +76,6 @@
       std::cerr << "Error: " << ex.what() << std::endl;                     \
       return -2;                                                            \
     } catch (...) {                                                         \
-      std::cerr << "Error on test" << std::endl;                            \
       return -3;                                                            \
     }                                                                       \
   }
