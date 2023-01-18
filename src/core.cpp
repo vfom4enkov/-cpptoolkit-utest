@@ -47,24 +47,26 @@ void Core::Add(cpptoolkit::test::tool::BaseFixture *fixture) {
 
 uint32_t Core::count() { return test_list_.size(); }
 
-void Core::RunTests(Observer *observer) {
-  for (uint32_t i = 0; i < test_list_.size(); i++) {
+
+std::vector<TestResult> Core::RunTests() {
+  std::vector<TestResult> result;
+  for (uint32_t i = 0; i < count(); i++) {
     cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
-    TestResult result;
-    result.name = fixture->name();
+    TestResult test_result;
+    test_result.name = fixture->name();
     try {
       fixture->Test();
-      result.is_success = true;
+      test_result.is_success = true;
     } catch (const cpptoolkit::test::tool::TestFailException &ex) {
-      result.is_success = false;
-      result.where = ex.where();
-      result.why = ex.why();
+      test_result.is_success = false;
+      test_result.where = ex.where();
+      test_result.why = ex.why();
     }
 
-    if (observer != nullptr) {
-      observer->Test(result);
-    }
+    result.push_back(test_result);
   }
+
+  return std::move(result);
 }
 
 }  // namespace test

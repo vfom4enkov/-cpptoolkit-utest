@@ -54,17 +54,6 @@ struct TestResult {
   std::string why;
 };
 
-
-/// @brief Notificator about test execution 
-class Observer {
-  public:
-    virtual ~Observer() = default;
-
-    /// @brief Notify about test execution
-    /// @param result Test execution result
-    virtual void Test(TestResult &result) = 0;
-};
-
 /// @brief Test container and runner (this object is singleton)
 class Core {
  public:
@@ -77,8 +66,8 @@ class Core {
   uint32_t count();
 
   /// @brief Run all unit tests
-  /// @param observer Observer for get result about each test execution
-  void RunTests(Observer *observer = nullptr);
+  /// @return Details about each test execution
+  std::vector<TestResult> RunTests();
 
   /// @brief Get pointer to instance of test container
   static Core *instance();
