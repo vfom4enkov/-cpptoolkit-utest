@@ -46,14 +46,24 @@ TK_TEST_CASE(test_compare_two_numbers) {
 ## Step 3 - Run unit test
 The simplest way to run unit tests and print result to command line, is - add these lines to your main.cpp file:
 ```cpp
-#include <cpptoolkit/test/run_all_macros.h>
+#include <cpptoolkit/test/header.h>
 
-TK_GET_READY_FOR_TESTS
+#include <iostream>
 
 int main() {
-  Run();
+  auto* core = cpptoolkit::test::Core::instance();
+  auto tests = core->RunTests();
+  for (const auto& test : tests) {
+    std::cout << test.name << "\t" << (test.is_success ? "OK" : "FAILED")
+              << std::endl;
+    if (!test.is_success) {
+      std::cout << "Where: " << test.where << std::endl;
+      std::cout << "Why: " << test.why << std::endl;
+    }
+  }
 }
 ```
 
 ## Step 4 - Check **example** folder for more details
 View examples to get more info aboud test with fixture or get statistic about test execution
+

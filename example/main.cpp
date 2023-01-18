@@ -27,74 +27,32 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+// #include <cpptoolkit/test/header.h>
+//
+// #include <iostream>
+//
+// int main() {
+//   auto* core = cpptoolkit::test::Core::instance();
+//   auto tests = core->RunTests();
+//   for (const auto& test : tests) {
+//     std::cout << test.name << "\t" << (test.is_success ? "OK" : "FAILED")
+//               << std::endl;
+//     if (!test.is_success) {
+//       std::cout << "Where: " << test.where << std::endl;
+//       std::cout << "Why: " << test.why << std::endl;
+//     }
+//   }
+// }
+
+// Or print all with colors
 #include <cpptoolkit/test/header.h>
+#include <cpptoolkit/test/run_all_macros.h>
 
 #include <iostream>
 
-#define RED_COLOR "\033[1;31m"
-#define GREEN_COLOR "\033[1;32m"
-#define CLEAR_COLOR "\033[0m"
-
-std::string PrintTestResult(bool result) {
-  std::string r("");
-  if (result) {
-    r += GREEN_COLOR;
-    r += "ok";
-  } else {
-    r += RED_COLOR;
-    r += "FAILED";
-  }
-  r += CLEAR_COLOR;
-  return r;
-}
-
-void PrintTest(const cpptoolkit::test::TestResult& test) {
-  std::cout << "test " << test.name << " ... "
-            << PrintTestResult(test.is_success) << std::endl;
-  if (!test.is_success) {
-    std::cout << "\twhy:\t" << test.why << std::endl;
-    std::cout << "\twhere:\t" << test.where << std::endl;
-    std::cout << std::endl;
-  }
-}
-
-void Run() {
-  cpptoolkit::test::Core* core = cpptoolkit::test::Core::instance();
-  if (core == nullptr) {
-    std::cerr << "Core is null" << std::endl;
-  }
-
-  try {
-    uint32_t test_count = core->count();
-    if (test_count == 1) {
-      std::cout << "running 1 test" << std::endl;
-    } else {
-      std::cout << "running " << test_count << " tests" << std::endl;
-    }
-
-    uint32_t success = 0;
-    uint32_t failed = 0;
-    std::vector<cpptoolkit::test::TestResult> tests = core->RunTests();
-    for (const cpptoolkit::test::TestResult& test : tests) {
-      PrintTest(test);
-      if (test.is_success) {
-        success++;
-      } else {
-        failed++;
-      }
-    }
-    std::cout << std::endl;
-    std::cout << "test result: " << success << " passed; " << failed
-              << " failed;" << std::endl;
-    std::cout << std::endl;
-  } catch (const std::runtime_error& ex) {
-    std::cerr << "Error: " << ex.what() << std::endl;
-  } catch (...) {
-    std::cerr << "Error on test" << std::endl;
-  }
-}
+TK_GET_READY_FOR_TESTS
 
 int main() {
-  Run();
+  return Run();
 }
 
