@@ -38,7 +38,7 @@
 #define GREEN_COLOR "\033[1;32m"
 #define CLEAR_COLOR "\033[0m"
 
-#define TK_RUN_ALL_MACROS                                               \
+#define TK_GET_READY_FOR_TESTS                                          \
   std::string PrintTestResult(bool result) {                            \
     std::string r("");                                                  \
     if (result) {                                                       \
@@ -76,7 +76,7 @@
     uint32_t failed_;                                                   \
   };                                                                    \
                                                                         \
-  void RunAll() {                                                       \
+  void Run() {                                                          \
     cpptoolkit::test::Core* core = cpptoolkit::test::Core::instance();  \
     if (core == nullptr) {                                              \
       std::cerr << "Core is null" << std::endl;                         \

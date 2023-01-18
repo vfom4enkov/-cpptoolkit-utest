@@ -29,9 +29,9 @@
 
 #include <cpptoolkit/test/run_all_macros.h>
 
-TK_RUN_ALL_MACROS
+TK_GET_READY_FOR_TESTS
 
 int main() {
-  RunAll();
+  Run();
 }
 
