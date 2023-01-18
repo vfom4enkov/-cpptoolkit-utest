@@ -88,8 +88,10 @@ int main() {
     }
 
     core->RunTests(&observer);
+    std::cout << std::endl;
     std::cout << "test result: " << observer.success() << " passed; "
               << observer.failed() << " failed;" << std::endl;
+    std::cout << std::endl;
   } catch (const std::runtime_error& ex) {
     std::cerr << "Error: " << ex.what() << std::endl;
   } catch (...) {
