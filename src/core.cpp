@@ -41,8 +41,8 @@ Core *Core::instance() {
   return instance_;
 }
 
-void Core::Add(cpptoolkit::test::tool::BaseFixture *fixture) {
-  test_list_.push_back(fixture);
+void Core::Add(cpptoolkit::test::tool::BaseTest *test) {
+  test_list_.push_back(test);
 }
 
 uint32_t Core::count() { return test_list_.size(); }
@@ -51,11 +51,11 @@ uint32_t Core::count() { return test_list_.size(); }
 std::vector<TestResult> Core::RunTests() {
   std::vector<TestResult> result;
   for (uint32_t i = 0; i < count(); i++) {
-    cpptoolkit::test::tool::BaseFixture *fixture = test_list_[i];
+    cpptoolkit::test::tool::BaseTest *test = test_list_[i];
     TestResult test_result;
-    test_result.name = fixture->name();
+    test_result.name = test->name();
     try {
-      fixture->Test();
+      test->Run();
       test_result.is_success = true;
     } catch (const cpptoolkit::test::tool::TestFailException &ex) {
       test_result.is_success = false;
