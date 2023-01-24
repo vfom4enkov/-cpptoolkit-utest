@@ -46,17 +46,17 @@ class MockFixture {};
 }  // namespace test
 }  // namespace cpptoolkit
 
-#define _TK_MACROS_TO_STRINGIFY(str) #str
+#define __TK_MACROS_TO_STRINGIFY(str) #str
 
-#define _TK_MACROS_TO_STRING(str) _TK_MACROS_TO_STRINGIFY(str)
+#define __TK_MACROS_TO_STRING(str) __TK_MACROS_TO_STRINGIFY(str)
 
-#define _TK_MACROS_STRING_CONCATENATION(a, b) a##b
-#define _TK_MACROS_STRING_CONCATENATION3(a, b, c) a##b##c
+#define __TK_MACROS_STRING_CONCATENATION(a, b) a##b
+#define __TK_MACROS_STRING_CONCATENATION3(a, b, c) a##b##c
 
-#define __TK_MACROS_THROW(why)                                            \
+#define __TK_MACROS_THROW(why) \
   cpptoolkit::test::tool::ThrowTestFailException(why, __FILE__, __LINE__);
 
-#define TK_EQUAL(expected, actual)             \
+#define TK_EQUAL(actual, expected)             \
   if (expected != actual) {                    \
     std::string why = "values are not equal!"; \
     __TK_MACROS_THROW(why);                    \
@@ -68,35 +68,45 @@ class MockFixture {};
     __TK_MACROS_THROW(why);                  \
   }
 
-#define TK_IS_NULL(ptr)                          \
-  if (ptr != nullptr) {                          \
-    std::string why = _TK_MACROS_TO_STRING(ptr); \
-    why += " is not null";                       \
-    __TK_MACROS_THROW(why);                      \
+#define TK_IS_NULL(ptr)                           \
+  if (ptr != nullptr) {                           \
+    std::string why = __TK_MACROS_TO_STRING(ptr); \
+    why += " is not null";                        \
+    __TK_MACROS_THROW(why);                       \
   }
 
-#define TK_IS_NOT_NULL(ptr)                      \
-  if (ptr == nullptr) {                          \
-    std::string why = _TK_MACROS_TO_STRING(ptr); \
-    why += " is null";                           \
-    __TK_MACROS_THROW(why);                      \
+#define TK_IS_NOT_NULL(ptr)                       \
+  if (ptr == nullptr) {                           \
+    std::string why = __TK_MACROS_TO_STRING(ptr); \
+    why += " is null";                            \
+    __TK_MACROS_THROW(why);                       \
   }
 
-#define TK_FIXTURE_TEST_CASE(test_name, fixture)                       \
-  class _TK_MACROS_STRING_CONCATENATION(test_name, _class)             \
-      : public cpptoolkit::test::tool::BaseFixture, public fixture {   \
-   public:                                                             \
-    _TK_MACROS_STRING_CONCATENATION(test_name, _class)() : fixture() { \
-      cpptoolkit::test::Core::instance()->Add(this);                   \
-    };                                                                 \
-    virtual ~_TK_MACROS_STRING_CONCATENATION(test_name, _class)(){};   \
-    void Test() override;                                              \
-    std::string name() override{                                       \
-        return std::string(_TK_MACROS_TO_STRING(test_name)); };        \
-  } _TK_MACROS_STRING_CONCATENATION3(test_name, _class, _instance);    \
-  void _TK_MACROS_STRING_CONCATENATION(test_name, _class)::Test()
+#define TK_FIXTURE_TEST_CASE(test_name, fixture)                            \
+  class __TK_MACROS_STRING_CONCATENATION(test_name, __fixture)              \
+      : public fixture {                                                    \
+   public:                                                                  \
+    void Test();                                                            \
+  };                                                                        \
+  class __TK_MACROS_STRING_CONCATENATION(test_name, __base_test)            \
+      : public cpptoolkit::test::tool::BaseTest {                           \
+   public:                                                                  \
+    __TK_MACROS_STRING_CONCATENATION(test_name, __base_test)() {            \
+      cpptoolkit::test::Core::instance()->Add(this);                        \
+    };                                                                      \
+    virtual ~__TK_MACROS_STRING_CONCATENATION(test_name, __base_test)(){};  \
+    void Run() override {                                                   \
+      __TK_MACROS_STRING_CONCATENATION(test_name, __fixture) test_instance; \
+      test_instance.Test();                                                 \
+    };                                                                      \
+    std::string name() override {                                           \
+      return std::string(__TK_MACROS_TO_STRING(test_name));                 \
+    };                                                                      \
+  } __TK_MACROS_STRING_CONCATENATION3(test_name, __base_test, _instance);   \
+  void __TK_MACROS_STRING_CONCATENATION(test_name, __fixture)::Test()
 
 #define TK_TEST_CASE(test_name) \
   TK_FIXTURE_TEST_CASE(test_name, cpptoolkit::test::tool::MockFixture)
 
 #endif  // CPPTOOLKIT_TEST_HEADER_H_
+

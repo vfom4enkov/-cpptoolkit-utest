@@ -27,8 +27,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
-#define CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
+#ifndef CPPTOOLKIT_TOOL_BASE_TEST_WRAPPER_H_
+#define CPPTOOLKIT_TOOL_BASE_TEST_WRAPPER_H_
 
 #include <string>
 
@@ -36,25 +36,21 @@ namespace cpptoolkit {
 namespace test {
 namespace tool {
 
-/// @brief Base fixture class for all tests 
-class BaseFixture {
-  public:
+/// @brief Base class for call test method
+class BaseTest {
+ public:
+  virtual ~BaseTest() = default;
 
-    /// @brief Create base fixture class
-    BaseFixture() = default;
+  /// @brief Run test
+  virtual void Run() = 0;
 
-    virtual ~BaseFixture() = default;
-
-    /// @brief Run a unit test bounded with this fixture
-    virtual void Test() = 0;
-
-    /// @brief Get test name
-    virtual std::string name() = 0;
+  /// @brief Get test name
+  virtual std::string name() = 0;
 };
 
 } // namespace tool
-} // namespace test
-} // namespace cpptoolkit
+}  // namespace test
+}  // namespace cpptoolkit
 
-#endif // CPPTOOLKIT_TEST_TOOL_BASE_FIXTURE_H_
+#endif  // CPPTOOLKIT_TOOL_BASE_TEST_WRAPPER_H_
 
