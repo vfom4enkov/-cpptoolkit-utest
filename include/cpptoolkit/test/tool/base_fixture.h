@@ -46,10 +46,7 @@ class BaseFixture {
     virtual ~BaseFixture() = default;
 
     /// @brief Run a unit test bounded with this fixture
-    virtual void Test() = 0;
-
-    /// @brief Get test name
-    virtual std::string name() = 0;
+    virtual void Run() = 0;
 };
 
 } // namespace tool

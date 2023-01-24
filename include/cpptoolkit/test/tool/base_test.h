@@ -27,47 +27,30 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cpptoolkit/test/core.h>
+#ifndef CPPTOOLKIT_TOOL_BASE_TEST_WRAPPER_H_
+#define CPPTOOLKIT_TOOL_BASE_TEST_WRAPPER_H_
+
+#include <string>
 
 namespace cpptoolkit {
 namespace test {
+namespace tool {
 
-Core *Core::instance_ = nullptr;
+/// @brief Base class for call test method
+class BaseTest {
+ public:
+  virtual ~BaseTest() = default;
 
-Core *Core::instance() {
-  if (instance_ == nullptr) {
-    instance_ = new Core();
-  }
-  return instance_;
-}
+  /// @brief Run test
+  virtual void Run() = 0;
 
-void Core::Add(cpptoolkit::test::tool::BaseTest *test) {
-  test_list_.push_back(test);
-}
+  /// @brief Get test name
+  virtual std::string name() = 0;
+};
 
-uint32_t Core::count() { return test_list_.size(); }
-
-
-std::vector<TestResult> Core::RunTests() {
-  std::vector<TestResult> result;
-  for (uint32_t i = 0; i < count(); i++) {
-    cpptoolkit::test::tool::BaseTest *test = test_list_[i];
-    TestResult test_result;
-    test_result.name = test->name();
-    try {
-      test->Run();
-      test_result.is_success = true;
-    } catch (const cpptoolkit::test::tool::TestFailException &ex) {
-      test_result.is_success = false;
-      test_result.where = ex.where();
-      test_result.why = ex.why();
-    }
-
-    result.push_back(test_result);
-  }
-
-  return std::move(result);
-}
-
+} // namespace tool
 }  // namespace test
 }  // namespace cpptoolkit
+
+#endif  // CPPTOOLKIT_TOOL_BASE_TEST_WRAPPER_H_
+
