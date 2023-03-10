@@ -36,7 +36,7 @@
   const std::string CLEAR = "\033[0m";                                    \
                                                                           \
   void PrintTest(const cpptoolkit::test::TestResult& test) {              \
-    std::cout << (test.is_success ? GREEN + "  OK  " : RED + "FAILED")    \
+    std::cout << (test.is_success ? GREEN + "   OK  " : RED + " FAILED")  \
               << CLEAR << "\t test: " << test.name << std::endl;          \
     if (!test.is_success) {                                               \
       std::cout << "\twhy:\t" << test.why << std::endl;                   \

@@ -27,32 +27,37 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cpptoolkit/test/header.h>
-
-#include <iostream>
-
-int main() {
-  auto* core = cpptoolkit::test::Core::instance();
-  auto tests = core->RunTests();
-  for (const auto& test : tests) {
-    std::cout << test.name << "\t" << (test.is_success ? "OK" : "FAILED")
-              << std::endl;
-    if (!test.is_success) {
-      std::cout << "Where: " << test.where << std::endl;
-      std::cout << "Why: " << test.why << std::endl;
-    }
-  }
-}
-
-// // Way for lazy developers
 // #include <cpptoolkit/test/header.h>
-// #include <cpptoolkit/test/run_all_macros.h>
 //
 // #include <iostream>
 //
-// TK_GET_READY_FOR_TESTS
-//
 // int main() {
-//   return Run();
+//   float f;
+//   double d;
+//   std::string m = "just a string";
+//   std::cout << "Is same: " << std::is_same<typeof(m), std::string>::value << std::endl;
+//   std::cout << "Is same: " << std::is_same<uint8_t, char>::value << std::endl;
+//   auto* core = cpptoolkit::test::Core::instance();
+//   auto tests = core->RunTests();
+//   for (const auto& test : tests) {
+//     std::cout << test.name << "\t" << (test.is_success ? "OK" : "FAILED")
+//               << std::endl;
+//     if (!test.is_success) {
+//       std::cout << "Where: " << test.where << std::endl;
+//       std::cout << "Why: " << test.why << std::endl;
+//     }
+//   }
 // }
+
+// Way for lazy developers
+#include <cpptoolkit/test/header.h>
+#include <cpptoolkit/test/run_all_macros.h>
+
+#include <iostream>
+
+TK_GET_READY_FOR_TESTS
+
+int main() {
+  return Run();
+}
 

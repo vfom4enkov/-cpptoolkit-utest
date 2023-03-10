@@ -44,6 +44,51 @@ void ThrowTestFailException(std::string why,
                             std::string file,
                             uint32_t line);
 
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(std::string actual, std::string expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(int64_t actual, int64_t expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(uint64_t actual, uint64_t expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(int32_t actual, int32_t expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(uint32_t actual, uint32_t expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(int16_t actual, int16_t expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(uint16_t actual, uint16_t expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(double actual, double expected);
+
+/// @brief Get details why walues are not equeal
+/// @param actual Actual value
+/// @param expected Expected value
+std::string FailDetails(char actual, char expected);
+
 } // namespace tool
 } // namespace test
 } // namespace cpptoolkit

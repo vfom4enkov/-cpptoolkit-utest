@@ -35,12 +35,36 @@ TK_TEST_CASE(test_compare_two_numbers) {
   TK_EQUAL(a, b);
 }
 
+TK_TEST_CASE(test_compare_two_bignumbers) {
+  uint64_t a = 0xffffffffffffffff;
+  uint64_t b = 0xffffffffffffffff;
+  TK_EQUAL(a, b);
+}
+
+TK_TEST_CASE(test_compare_two_numbers_2) {
+  int32_t a = 0xffffffff;
+  uint32_t b = 0xffffffff;
+  TK_EQUAL(a, b);
+}
+
+TK_TEST_CASE(test_compare_two_different_types) {
+  uint64_t a = 0xffffffff;
+  uint64_t b = 0xffffffff;
+  TK_EQUAL(a, b);
+}
+
+
 TK_TEST_CASE(test_compare_two_doubles) {
   double m = 16.005;
   double n = 16.005;
   TK_EQUAL(m, n);
 }
 
+TK_TEST_CASE(test_compare_two_floats) {
+  float m = 16.005;
+  float n = 16.005;
+  TK_EQUAL(m, n);
+}
 TK_TEST_CASE(test_compare_two_strings) {
   std::string str_1 = "test string";
   std::string str_2 = "test string";
