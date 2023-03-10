@@ -36,61 +36,13 @@ namespace cpptoolkit {
 namespace test {
 namespace tool {
 
-namespace {
-std::string format_string(std::string a, std::string b) {
-  std::string str = "(";
-  str += a;
-  str += ") is not equal (";
-  str += b;
-  str += ")";
-  return str;
-}
-
-}  // namespace
 
 void ThrowTestFailException(std::string why, std::string file, uint32_t line) {
   std::string where = file + ":" + std::to_string(line);
   throw TestFailException(why.c_str(), where.c_str());
 }
 
-std::string FailDetails(std::string actual, std::string expected) {
-  return format_string(actual, expected);
-}
-
-std::string FailDetails(int64_t actual, int64_t expected) {
-    return format_string(std::to_string(actual), std::to_string(expected));
-}
-
-std::string FailDetails(uint64_t actual, uint64_t expected) {
-    return format_string(std::to_string(actual), std::to_string(expected));
-}
-
-std::string FailDetails(int32_t actual, int32_t expected) {
-    return format_string(std::to_string(actual), std::to_string(expected));
-}
-
-std::string FailDetails(uint32_t actual, uint32_t expected) {
-    return format_string(std::to_string(actual), std::to_string(expected));
-}
-
-std::string FailDetails(int16_t actual, int16_t expected) {
-    return format_string(std::to_string(actual), std::to_string(expected));
-}
-
-std::string FailDetails(uint16_t actual, uint16_t expected) {
-    return format_string(std::to_string(actual), std::to_string(expected));
-}
-
-std::string FailDetails(double actual, double expected) {
-    return format_string(std::to_string(actual), std::to_string(expected));
-}
-
-std::string FailDetails(char actual, char expected) {
-return format_string(
-      std::to_string(static_cast<unsigned>(actual)),
-      std::to_string(static_cast<unsigned>(expected)));
-}
-
 }  // namespace tool
 }  // namespace test
 }  // namespace cpptoolkit
+
