@@ -57,13 +57,9 @@ class MockFixture {};
 #define __TK_MACROS_THROW(why) \
   cpptoolkit::test::tool::ThrowTestFailException(why, __FILE__, __LINE__);
 
-#define TK_EQUAL(actual, expected) \
-  if (expected != actual) {        \
-    std::stringstream ss;          \
-    ss << "(" << actual << ")"     \
-       << " is not equeal "        \
-       << "(" << expected << ")";  \
-    __TK_MACROS_THROW(ss.str());   \
+#define TK_EQUAL(actual, expected)             \
+  if (expected != actual) {                    \
+    __TK_MACROS_THROW("values are not equal"); \
   }
 
 #define TK_CHECK(val)                        \
@@ -113,4 +109,3 @@ class MockFixture {};
   TK_FIXTURE_TEST_CASE(test_name, cpptoolkit::test::tool::MockFixture)
 
 #endif  // CPPTOOLKIT_TEST_HEADER_H_
-
