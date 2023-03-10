@@ -40,13 +40,11 @@ namespace tool {
 /// @param why Fail reason description
 /// @param file File with failed test
 /// @param line Line number where test fail
-void ThrowTestFailException(std::string why,
-                            std::string file,
-                            uint32_t line);
+void ThrowTestFailException(std::string why, std::string file, uint32_t line);
 
-} // namespace tool
-} // namespace test
-} // namespace cpptoolkit
+}  // namespace tool
+}  // namespace test
+}  // namespace cpptoolkit
 
-#endif // CPPTOOLKIT_TEST_TOOL_COMMON_H_
+#endif  // CPPTOOLKIT_TEST_TOOL_COMMON_H_
 

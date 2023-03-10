@@ -33,6 +33,7 @@
 #include <cpptoolkit/test/core.h>
 #include <cpptoolkit/test/tool/common.h>
 
+#include <sstream>
 #include <string>
 
 namespace cpptoolkit {
@@ -56,10 +57,13 @@ class MockFixture {};
 #define __TK_MACROS_THROW(why) \
   cpptoolkit::test::tool::ThrowTestFailException(why, __FILE__, __LINE__);
 
-#define TK_EQUAL(actual, expected)             \
-  if (expected != actual) {                    \
-    std::string why = "values are not equal!"; \
-    __TK_MACROS_THROW(why);                    \
+#define TK_EQUAL(actual, expected) \
+  if (expected != actual) {        \
+    std::stringstream ss;          \
+    ss << "(" << actual << ")"     \
+       << " is not equeal "        \
+       << "(" << expected << ")";  \
+    __TK_MACROS_THROW(ss.str());   \
   }
 
 #define TK_CHECK(val)                        \
