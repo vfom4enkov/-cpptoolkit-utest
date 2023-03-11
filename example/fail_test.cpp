@@ -29,22 +29,42 @@
 
 #include <cpptoolkit/test/header.h>
 
+namespace {
+
+enum class TestEnum {
+  kValidData = 0,
+  kInvalidData = 1,
+};
+
+} // namespace
+
 TK_TEST_CASE(test_compare_two_numbers_fail) {
   int a = 5;
   int b = 6;
-  TK_EQUAL(a, b);
+  TK_EQUAL_VAL(a, b);
+}
+
+TK_TEST_CASE(test_compare_two_chars_fail) {
+  char a = 5;
+  signed char b = -6;
+  TK_EQUAL_VAL(a, b);
 }
 
 TK_TEST_CASE(test_compare_two_doubles_fail) {
   double m = 16.005;
   double n = 16.0009;
-  TK_EQUAL(m, n);
+  TK_EQUAL_VAL(m, n);
+}
+
+TK_TEST_CASE(test_compare_two_enums_fail) {
+  TestEnum a = TestEnum::kInvalidData;
+  TK_EQUAL(a, TestEnum::kValidData);
 }
 
 TK_TEST_CASE(test_compare_two_strings_fail) {
   std::string str_1 = "test string";
   std::string str_2 = "test string!";
-  TK_EQUAL(str_1, str_2);
+  TK_EQUAL_STR(str_1, str_2);
 }
 
 TK_TEST_CASE(test_bool_value_fail) {

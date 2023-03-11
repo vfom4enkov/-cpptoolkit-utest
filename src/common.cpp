@@ -28,20 +28,30 @@
  */
 
 #include <cpptoolkit/test/tool/common.h>
+
+#include <sstream>
 #include <string>
 
 namespace cpptoolkit {
 namespace test {
 namespace tool {
 
-void ThrowTestFailException(std::string why,
-                            std::string file,
-                            uint32_t line) {
+
+void ThrowTestFailException(std::string why, std::string file, uint32_t line) {
   std::string where = file + ":" + std::to_string(line);
   throw TestFailException(why.c_str(), where.c_str());
 }
 
-} // namespace tool
-} // namespace test
-} // namespace cpptoolkit
+std::string StrNotEqualMessage(std::string actual, std::string expected) {
+  std::string res = "(";
+  res += actual;
+  res += ") is not equal to (";
+  res += expected;
+  res += ")";
+  return res;
+}
+
+}  // namespace tool
+}  // namespace test
+}  // namespace cpptoolkit
 

@@ -30,54 +30,53 @@
 #ifndef CPPTOOLKIT_TEST_RUN_ALL_MACROS_H_
 #define CPPTOOLKIT_TEST_RUN_ALL_MACROS_H_
 
-#define TK_GET_READY_FOR_TESTS                                              \
-  const std::string RED = "\033[1;31m";                                     \
-  const std::string GREEN = "\033[1;32m";                                   \
-  const std::string CLEAR = "\033[0m";                                      \
-                                                                            \
-  void PrintTest(const cpptoolkit::test::TestResult& test) {                \
-    std::cout << "test " << test.name << " ... "                            \
-              << (test.is_success ? GREEN + "OK" : RED + "FAILED") << CLEAR \
-              << std::endl;                                                 \
-    if (!test.is_success) {                                                 \
-      std::cout << "\twhy:\t" << test.why << std::endl;                     \
-      std::cout << "\twhere:\t" << test.where << std::endl;                 \
-      std::cout << std::endl;                                               \
-    }                                                                       \
-  }                                                                         \
-                                                                            \
-  int Run() {                                                               \
-    cpptoolkit::test::Core* core = cpptoolkit::test::Core::instance();      \
-    if (core == nullptr) {                                                  \
-      return -1;                                                            \
-    }                                                                       \
-                                                                            \
-    try {                                                                   \
-      std::cout << "running " << core->count() << " test"                   \
-                  << (core->count() == 1 ? "s" : "") << std::endl;          \
-                                                                            \
-      uint32_t success = 0;                                                 \
-      uint32_t failed = 0;                                                  \
-      std::vector<cpptoolkit::test::TestResult> tests = core->RunTests();   \
-      for (const cpptoolkit::test::TestResult& test : tests) {              \
-        PrintTest(test);                                                    \
-        if (test.is_success) {                                              \
-          success++;                                                        \
-        } else {                                                            \
-          failed++;                                                         \
-        }                                                                   \
-      }                                                                     \
-      std::cout << std::endl;                                               \
-      std::cout << "test result: " << success << " passed; " << failed      \
-                << " failed;" << std::endl;                                 \
-      std::cout << std::endl;                                               \
-      return 0;                                                             \
-    } catch (const std::runtime_error& ex) {                                \
-      std::cerr << "Error: " << ex.what() << std::endl;                     \
-      return -2;                                                            \
-    } catch (...) {                                                         \
-      return -3;                                                            \
-    }                                                                       \
+#define TK_GET_READY_FOR_TESTS                                            \
+  const std::string RED = "\033[1;31m";                                   \
+  const std::string GREEN = "\033[1;32m";                                 \
+  const std::string CLEAR = "\033[0m";                                    \
+                                                                          \
+  void PrintTest(const cpptoolkit::test::TestResult& test) {              \
+    std::cout << (test.is_success ? GREEN + "   OK  " : RED + " FAILED")  \
+              << CLEAR << "\t test: " << test.name << std::endl;          \
+    if (!test.is_success) {                                               \
+      std::cout << "\twhy:\t" << test.why << std::endl;                   \
+      std::cout << "\twhere:\t" << test.where << std::endl;               \
+      std::cout << std::endl;                                             \
+    }                                                                     \
+  }                                                                       \
+                                                                          \
+  int Run() {                                                             \
+    cpptoolkit::test::Core* core = cpptoolkit::test::Core::instance();    \
+    if (core == nullptr) {                                                \
+      return -1;                                                          \
+    }                                                                     \
+                                                                          \
+    try {                                                                 \
+      std::cout << "running " << core->count() << " test"                 \
+                << (core->count() == 1 ? "s" : "") << std::endl;          \
+                                                                          \
+      uint32_t success = 0;                                               \
+      uint32_t failed = 0;                                                \
+      std::vector<cpptoolkit::test::TestResult> tests = core->RunTests(); \
+      for (const cpptoolkit::test::TestResult& test : tests) {            \
+        PrintTest(test);                                                  \
+        if (test.is_success) {                                            \
+          success++;                                                      \
+        } else {                                                          \
+          failed++;                                                       \
+        }                                                                 \
+      }                                                                   \
+      std::cout << std::endl;                                             \
+      std::cout << "test result: " << success << " passed; " << failed    \
+                << " failed;" << std::endl;                               \
+      std::cout << std::endl;                                             \
+      return 0;                                                           \
+    } catch (const std::runtime_error& ex) {                              \
+      std::cerr << "Error: " << ex.what() << std::endl;                   \
+      return -2;                                                          \
+    } catch (...) {                                                       \
+      return -3;                                                          \
+    }                                                                     \
   }
 
 #endif  // CPPTOOLKIT_TEST_RUN_ALL_MACROS_H_
