@@ -22,7 +22,9 @@ Where _Fixture_ - custom class
 
 Check results of the unit tests:
 * **TK_CHECK(val)** // val - bool value or expression
-* **TK_EQUAL(expected, actual)** // expected == actual
+* **TK_EQUAL_STR(expected, actual)** // expected == actual for strings
+* **TK_EQUAL_VAL(expected, actual)** // expected == actual for base types (int, char, double ...)
+* **TK_EQUAL(expected, actual)** // expected == actual for other types
 * **TK_IS_NULL(ptr)** // ptr == nullptr
 * **TK_IS_NOT_NULL(ptr)** // ptr != nullptr
 
