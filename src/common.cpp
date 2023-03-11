@@ -42,6 +42,15 @@ void ThrowTestFailException(std::string why, std::string file, uint32_t line) {
   throw TestFailException(why.c_str(), where.c_str());
 }
 
+std::string StrNotEqualMessage(std::string actual, std::string expected) {
+  std::string res = "(";
+  res += actual;
+  res += ") is not equal to (";
+  res += expected;
+  res += ")";
+  return res;
+}
+
 }  // namespace tool
 }  // namespace test
 }  // namespace cpptoolkit

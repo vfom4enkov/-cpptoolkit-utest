@@ -31,6 +31,7 @@
 #define CPPTOOLKIT_TEST_TOOL_COMMON_H_
 
 #include <cpptoolkit/test/tool/test_fail_exception.h>
+#include <type_traits>
 
 namespace cpptoolkit {
 namespace test {
@@ -41,6 +42,24 @@ namespace tool {
 /// @param file File with failed test
 /// @param line Line number where test fail
 void ThrowTestFailException(std::string why, std::string file, uint32_t line);
+
+/// @brief Message for not equal strings
+/// @param actual Actual string
+/// @param expected Expected string
+std::string StrNotEqualMessage(std::string actual, std::string expected);
+
+/// @brief Message for not equal values
+/// @tparam N Type of actual value (int, short int, long int, double end etc.)
+/// @tparam M Type of expected value (int, short int, long int, double and etc.)
+/// @param actual Actual value
+/// @param expected Expected value
+template<typename N, typename M>
+std::string ValNotEqualMessage(N actual, M expected) {
+  std::string res = std::to_string(actual);
+  res += " != ";
+  res += std::to_string(expected);
+  return res;
+}
 
 }  // namespace tool
 }  // namespace test
