@@ -69,12 +69,6 @@ class MockFixture {};
         cpptoolkit::test::tool::ValNotEqualMessage(actual, expected)); \
   }
 
-#define TK_EQUAL_CHAR(actual, expected)                                 \
-  if (expected != actual) {                                             \
-    __TK_MACROS_THROW(                                                  \
-        cpptoolkit::test::tool::CharNotEqualMessage(actual, expected)); \
-  }
-
 #define TK_EQUAL(actual, expected)             \
   if (expected != actual) {                    \
     __TK_MACROS_THROW("values are not equal"); \

@@ -55,26 +55,9 @@ std::string StrNotEqualMessage(std::string actual, std::string expected);
 /// @param expected Expected value
 template<typename N, typename M>
 std::string ValNotEqualMessage(N actual, M expected) {
-  std::string res = "(";
-  res += std::to_string(actual);
-  res += ") is not equal to (";
+  std::string res = std::to_string(actual);
+  res += " != ";
   res += std::to_string(expected);
-  res += ")";
-  return res;
-}
-
-/// @brief Message for not equal values
-/// @tparam N Type of actual value (char, signed shar or nusigned char)
-/// @tparam M Type of actual value (char, signed shar or nusigned char)
-/// @param actual Actual value
-/// @param expected Expected value
-template<typename N, typename M>
-std::string CharNotEqualMessage(N actual, M expected) {
-  std::string res = "(";
-  res += std::to_string(static_cast<unsigned>(actual));
-  res += ") is not equal to (";
-  res += std::to_string(static_cast<unsigned>(expected));
-  res += ")";
   return res;
 }
 
