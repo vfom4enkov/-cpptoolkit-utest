@@ -6,6 +6,8 @@
 # Folders for build
 /build*/
 /.vscode/
+/.vs/
+/out/
 /compile_commands.json
 /.cache
 
