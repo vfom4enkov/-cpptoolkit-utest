@@ -62,7 +62,7 @@ class Core {
   void Add(cpptoolkit::test::tool::BaseTest *test);
 
   /// @brief Get all test count
-  uint32_t count();
+  size_t count();
 
   /// @brief Run all unit tests
   /// @return Details about each test execution

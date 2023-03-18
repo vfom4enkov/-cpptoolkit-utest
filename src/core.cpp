@@ -45,7 +45,7 @@ void Core::Add(cpptoolkit::test::tool::BaseTest *test) {
   test_list_.push_back(test);
 }
 
-uint32_t Core::count() { return test_list_.size(); }
+size_t Core::count() { return test_list_.size(); }
 
 
 std::vector<TestResult> Core::RunTests() {

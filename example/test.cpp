@@ -61,8 +61,8 @@ TK_TEST_CASE(test_compare_two_doubles) {
 }
 
 TK_TEST_CASE(test_compare_two_floats) {
-  float m = 16.005;
-  float n = 16.005;
+  float m = 16.005f;
+  float n = 16.005f;
   TK_EQUAL(m, n);
 }
 TK_TEST_CASE(test_compare_two_strings) {
