@@ -7,7 +7,7 @@ option(INCLUDE_EXAMPLE "Build the example" OFF)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-file(GLOB HEADERS "include/*.h")
+file(GLOB HEADERS "include/cpptoolkit/test/*.h" "include/cpptoolkit/test/tool/*.h")
 file(GLOB SOURCES "src/*.cpp")
 
 add_library(cpptoolkit-test ${HEADERS} ${SOURCES})
@@ -17,4 +17,3 @@ set_target_properties(cpptoolkit-test PROPERTIES LINKER_LANGUAGE CXX)
 if (INCLUDE_EXAMPLE)
     add_subdirectory("example")
 endif (INCLUDE_EXAMPLE)
-
