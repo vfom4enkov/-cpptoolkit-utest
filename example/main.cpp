@@ -32,16 +32,19 @@
 #include <iostream>
 
 int main() {
+  int return_result = 0;
   auto* core = cpptoolkit::test::Core::instance();
   auto tests = core->RunTests();
   for (const auto& test : tests) {
     std::cout << test.name << "\t" << (test.is_success ? "OK" : "FAILED")
               << std::endl;
     if (!test.is_success) {
+      return_result = 1;
       std::cout << "Where: " << test.where << std::endl;
       std::cout << "Why: " << test.why << std::endl;
     }
   }
+  return return_result;
 }
 
 // // Way for lazy developers

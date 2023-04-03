@@ -48,9 +48,10 @@
   int Run() {                                                             \
     cpptoolkit::test::Core* core = cpptoolkit::test::Core::instance();    \
     if (core == nullptr) {                                                \
-      return -1;                                                          \
+      return 2;                                                           \
     }                                                                     \
                                                                           \
+    int res = 0;                                                          \
     try {                                                                 \
       std::cout << "running " << core->count() << " test"                 \
                 << (core->count() == 1 ? "s" : "") << std::endl;          \
@@ -63,6 +64,7 @@
         if (test.is_success) {                                            \
           success++;                                                      \
         } else {                                                          \
+          res = 1;                                                        \
           failed++;                                                       \
         }                                                                 \
       }                                                                   \
@@ -70,14 +72,13 @@
       std::cout << "test result: " << success << " passed; " << failed    \
                 << " failed;" << std::endl;                               \
       std::cout << std::endl;                                             \
-      return 0;                                                           \
+      return res;                                                         \
     } catch (const std::runtime_error& ex) {                              \
       std::cerr << "Error: " << ex.what() << std::endl;                   \
-      return -2;                                                          \
+      return 3;                                                           \
     } catch (...) {                                                       \
-      return -3;                                                          \
+      return 4;                                                           \
     }                                                                     \
   }
 
 #endif  // CPPTOOLKIT_TEST_RUN_ALL_MACROS_H_
-
